@@ -1,8 +1,8 @@
+
 pipeline {
     agent {
         label "windows-worker"
     }
-
     stages {
         stage('Angular Verification') {
             steps {
@@ -10,16 +10,25 @@ pipeline {
             }
         }
         
-        stage('Initialize Terraform'){
-           steps {
-                 bat "terraform init"
-             }
+        stage('Dependencies Installation') {
+            steps {
+                bat "npm install"
+            }
         }
-
-         stage('Create Infrastructure AWS Terraform'){
-             steps {
-                 bat "terraform apply --auto-approve"
-             }
+        stage('Lint Test Execution') {
+            steps {
+                bat "ng lint"
+            }
+        }
+        stage('Unit Test Execution') {
+            steps {
+                bat "ng test"
+            }
+        }
+        stage('Build Execution') {
+            steps {
+                bat "ng build"
+            }
         }
     }
 }
