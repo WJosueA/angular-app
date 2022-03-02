@@ -29,11 +29,5 @@ pipeline {
                 bat "ng build"
             }
         }
-        
-        stage('Deploy Application') {
-            steps {
-                bat "xcopy dist\\clase6 C:\\inetpub\\wwwroot\\romell\\dev /s /y"
-            }
-        }
     }
 }
